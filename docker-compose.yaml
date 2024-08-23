@@ -13,15 +13,14 @@ services:
         source: ./nginx.conf
         target: /etc/nginx/conf.d/default.conf
         read_only: true
-      # SSL
-      # - type: bind
-      #   source: ./certs/nginx-selfsigned.key
-      #   target: /var/nginx-selfsigned.key
-      #   read_only: true
-      # - type: bind
-      #   source: ./certs/nginx-selfsigned.crt
-      #   target: /var/nginx-selfsigned.crt
-      #   read_only: true
+      - type: bind
+        source: ${SSL_CERTIFICATE_KEY}
+        target: /var/ssl_certificate.key
+        read_only: true
+      - type: bind
+        source: ${SSL_CERTIFICATE}
+        target: /var/ssl_certificate.crt
+        read_only: true
 
     depends_on:
       - keycloak
