@@ -64,6 +64,7 @@ services:
     # ports:
     #   - 8080:8080
     restart: always
+    entrypoint: /opt/keycloak/bin/kc.sh start --proxy-headers forwarded
     depends_on:
       postgres:
         condition: service_healthy
