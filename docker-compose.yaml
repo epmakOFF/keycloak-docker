@@ -14,11 +14,11 @@ services:
         target: /etc/nginx/conf.d/default.conf
         read_only: true
       - type: bind
-        source: /etc/ssl/private/nginx-selfsigned.key
+        source: ./certs/nginx-selfsigned.key
         target: /var/nginx-selfsigned.key
         read_only: true
       - type: bind
-        source: /etc/ssl/certs/nginx-selfsigned.crt
+        source: ./certs/nginx-selfsigned.crt
         target: /var/nginx-selfsigned.crt
         read_only: true
 
