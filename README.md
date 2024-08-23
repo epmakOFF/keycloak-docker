@@ -1,3 +1,9 @@
+Клонировать репозиторий
+``` bash
+git clone https://github.com/epmakOFF/keycloak-docker.git
+cd keycloak-docker
+```
+
 Установить Docker
 ``` bash
 curl -fsSL https://get.docker.com -o get-docker.sh  
@@ -11,6 +17,7 @@ sg docker # обновить права на группу, если не пол�
 ```
 Переопределить переменные в файле `.env`, для выпуска самоподписанного сертификата выполнить:  
 ``` bash
+mkdir certs
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout certs/nginx-selfsigned.key -out certs/nginx-selfsigned.crt
 ```
 
