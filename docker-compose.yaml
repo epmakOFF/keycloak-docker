@@ -1,5 +1,5 @@
+version: "3"
 name: keycloak-app
-
 services:
   web:
     image: nginx:alpine
