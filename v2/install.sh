@@ -23,4 +23,4 @@ cat <<EOF >./crontab
 EOF
 
 crontab ./crontab
-docker compose -f ./docker-compose.yaml -d up
+docker compose -f ./docker-compose.yaml up -d
