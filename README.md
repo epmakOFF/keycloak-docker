@@ -21,7 +21,6 @@ sudo sh get-docker.sh
 ``` bash
 sudo usermod -aG docker $USER
 sg docker # обновить права на группу, если не получится, перелогиниться
-id # если нет группы docker, перелогиниться
 ```
 
 ### Настройка <a id="tuning"/></a>
