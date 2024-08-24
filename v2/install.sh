@@ -8,9 +8,9 @@ fi
 
  
 # Phase 1
-docker-compose -f ./docker-compose-initiate.yaml up -d nginx
-docker-compose -f ./docker-compose-initiate.yaml up certbot
-docker-compose -f ./docker-compose-initiate.yaml down
+docker compose -f ./docker-compose-initiate.yaml up -d nginx
+docker compose -f ./docker-compose-initiate.yaml up certbot
+docker compose -f ./docker-compose-initiate.yaml down
  
 # some configurations for let's encrypt
 curl -L --create-dirs -o letsencrypt/options-ssl-nginx.conf https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf
@@ -23,4 +23,4 @@ cat <<EOF >./crontab
 EOF
 
 crontab ./crontab
-docker-compose -f ./docker-compose.yaml -d up
+docker compose -f ./docker-compose.yaml -d up

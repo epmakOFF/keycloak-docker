@@ -9,5 +9,5 @@ else
 fi
  
 # renew certbot certificate
-docker-compose -f $DIRSTACK/docker-compose.yaml run --rm certbot
-docker-compose -f $DIRSTACK/docker-compose.yaml exec web nginx -s reload
+docker compose -f $DIRSTACK/docker-compose.yaml run --rm certbot
+docker compose -f $DIRSTACK/docker-compose.yaml exec web nginx -s reload
