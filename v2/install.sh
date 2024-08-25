@@ -1,8 +1,5 @@
 #!/bin/bash
 
-curl -fsSL https://get.docker.com -o get-docker.sh  
-sh get-docker.sh
-
 restore_config ()
 {
 clear
@@ -17,6 +14,17 @@ EMAIL=CHANGE_ME
 EOF
 exit
 }
+
+program_exists() {
+    type "$1" >/dev/null 2>&1
+}
+
+if program_exists "docker"; then
+    echo "Docker is installed."
+else
+    curl -fsSL https://get.docker.com -o get-docker.sh  
+    sh get-docker.sh
+fi
 
 
 if [ "$#" -ge 3 ]
