@@ -9,7 +9,6 @@ POSTGRES_DB=keycloak_db
 POSTGRES_USER=keycloak_db_user
 POSTGRES_PASSWORD=keycloak_db_user_password
 KEYCLOAK_ADMIN=admin
-KEYCLOAK_ADMIN_PASSWORD=password
 EMAIL=CHANGE_ME
 EOF
 exit
@@ -94,6 +93,8 @@ elif [ "$choice" != "y" ]
         fi
 fi
  
+echo KEYCLOAK_ADMIN_PASSWORD=$(tr -dc 'A-Za-z0-9!?%=' < /dev/urandom | head -c 16) >> .env
+
 # Phase 1
 docker compose -f ./docker-compose-initiate.yaml up -d nginx
 docker compose -f ./docker-compose-initiate.yaml up certbot
