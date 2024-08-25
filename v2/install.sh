@@ -115,5 +115,6 @@ docker compose -f ./docker-compose.yaml up -d
 
 echo Your configuration:
 cat .env
+source .env
 echo
 echo Keycloak is will be available in a minute at https://$KC_HOSTNAME
