@@ -1,9 +1,12 @@
 ## Разворачиваем собсственный IdP
 Содержание:  
+Самоподписанный/собственный сертификат  
 * [Подготовка](#preparing)
 * [Настройка](#tuning)
+Сертификат от Let’s Encrypt
+* [Установка и запуск](#deploy)
 
-
+## Самоподписанный/собственный сертификат  
 ### Подготовка <a id="preparing"/></a>
 Клонировать репозиторий
 ``` bash
@@ -47,4 +50,32 @@ docker compose up -d
 Выполнить запуск:
 ``` bash
 docker compose up -d
+```
+
+
+## Сертификат от Let’s Encrypt  
+### Подготовка <a id="deploy"/></a>
+Клонировать репозиторий
+``` bash
+git clone https://github.com/epmakOFF/keycloak-docker.git
+cd keycloak-docker/v2
+```
+
+Сделать скрипты исполняемыми
+``` bash
+chmod +x *.shchmod +x *.sh
+```
+(Опционально)  
+Изменить парамерты доступа к БД, логин администратора и email в файле `.env`
+
+### Запуск  
+Выполнить установку, в качестве параметров передать домен и email. Если домен не задан, будет использован `ip`.sslip.io. Email должен быть определен в `.env`. Примеры запуска:
+``` bash
+sudo ./install.sh  # задан email в .env, в качестве домена используется ip.sslip.io
+```
+``` bash
+sudo ./install.sh admin@example.org # в качестве домена используется ip.sslip.io
+```
+``` bash
+sudo ./install.sh sso.examle.org admin@example.org # переданы оба значения
 ```
