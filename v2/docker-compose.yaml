@@ -2,7 +2,7 @@ version: "3"
 name: keycloak-app
 services:
   web:
-    image: nginx:latest
+    image: nginx:1.27.1
     restart: unless-stopped
     ports:
       - "80:80"
@@ -20,7 +20,7 @@ services:
       - keycloak
   certbot:
     container_name: certbot
-    image: certbot/certbot:latest
+    image: certbot/certbot:v2.11.0
     depends_on:
       - web
     command: >-

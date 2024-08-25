@@ -2,7 +2,7 @@ version: "3"
 services:
   nginx:
     container_name: nginx
-    image: nginx:latest
+    image: nginx:1.27.1
     environment:
       KC_HOSTNAME: ${KC_HOSTNAME}
     ports:
@@ -13,7 +13,7 @@ services:
       - ./certbot/data:/var/www/certbot
   certbot:
     container_name: certbot
-    image: certbot/certbot:latest
+    image: certbot/certbot:v2.11.0
     depends_on:
       - nginx
     command: >-

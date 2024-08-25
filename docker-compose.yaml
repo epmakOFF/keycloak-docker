@@ -2,7 +2,7 @@ version: "3"
 name: keycloak-app
 services:
   web:
-    image: nginx:alpine
+    image: nginx:1.27.1-alpine
     ports:
       - "80:80"
       - "443:443"
