@@ -118,3 +118,5 @@ cat .env
 source .env
 echo
 echo Keycloak is will be available in a minute at https://$KC_HOSTNAME
+echo Username: $KEYCLOAK_ADMIN
+echo Password: $KEYCLOAK_ADMIN_PASSWORD
