@@ -21,6 +21,7 @@ program_exists() {
 
 if program_exists "docker"; then
     echo "Docker is installed."
+    echo
 else
     curl -fsSL https://get.docker.com -o get-docker.sh  
     sh get-docker.sh
