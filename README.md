@@ -37,7 +37,7 @@ export KC_HOSTNAME=$(curl -s 2ip.ru).sslip.io
 Для выпуска самоподписанного сертификата выполнить:  
 ``` bash
 mkdir certs
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout certs/nginx-selfsigned.key -out certs/nginx-selfsigned.crt
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout certs/nginx-selfsigned.key -out certs/nginx-selfsigned.crt -subj "/C=RU/ST=Moscow/L=Moscow/O=TestOrg/OU=IT/CN=$KC_HOSTNAME/emailAddress=it@$KC_HOSTNAME"
 ```
 
 Выполнить запуск:
