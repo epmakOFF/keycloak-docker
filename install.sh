@@ -110,6 +110,8 @@ elif [ "$choice" != "y" ]
 fi
  
 echo KEYCLOAK_ADMIN_PASSWORD=$(tr -dc 'A-Za-z0-9!?%=' < /dev/urandom | head -c 16) >> .env
+docker compose -f ./docker-compose.yaml up -d
+
 
 echo Your configuration:
 cat .env
