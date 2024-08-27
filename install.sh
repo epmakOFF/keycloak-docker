@@ -43,7 +43,7 @@ else
     echo KC_HOSTNAME=$domain >> .env
     KC_HOSTNAME=$domain
 fi
-
+echo.
 echo -n "Do you have certificate [y\N] "
 	read -e have_cert
 if [ "$have_cert" = "" ]
