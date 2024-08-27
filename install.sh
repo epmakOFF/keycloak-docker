@@ -25,6 +25,31 @@ generate_cert() {
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout certs/nginx-selfsigned.key -out certs/nginx-selfsigned.crt -subj "/C=RU/ST=Moscow/L=Moscow/O=TestOrg/OU=IT/CN=$KC_HOSTNAME/emailAddress=it@$KC_HOSTNAME"    
 }
 
+cert_dialog() {
+    echo -n "Enter path to your certificate "
+	    read -e cert
+    if [ -s $cert ]
+    then
+        sed -i '/SSL_CERTIFICATE/d' .env
+        echo SSL_CERTIFICATE=$cert >> .env
+    else
+        echo File not found!
+        echo Abort!
+        exit
+    fi
+    echo -n "Enter path to your private key "
+        read -e privkey
+    if [ -s $privkey ]
+    then
+        sed -i '/SSL_CERTIFICATE_KEY/d' .env
+        echo SSL_CERTIFICATE_KEY=$privkey >> .env
+    else
+        echo File not found!
+        echo Abort!
+        exit
+    fi
+}
+
 if program_exists "docker"; then
     echo "Docker is installed."
     echo
@@ -57,28 +82,7 @@ elif [ "$have_cert" = "y" ]
     then
         if [ "$have_cert" = "Y" ]
             then
-                echo -n "Enter path to your certificate "
-	                read -e cert
-                if [ -s $cert ]
-                then
-                    sed -i '/SSL_CERTIFICATE/d' .env
-                    echo SSL_CERTIFICATE=$cert >> .env
-                else
-                    echo File not found!
-                    echo Abort!
-                    exit
-                fi
-                echo -n "Enter path to your private key "
-	                read -e privkey
-                if [ -s $privkey ]
-                then
-                    sed -i '/SSL_CERTIFICATE_KEY/d' .env
-                    echo SSL_CERTIFICATE_KEY=$privkey >> .env
-                else
-                    echo File not found!
-                    echo Abort!
-                    exit
-                fi
+                
         fi
 else
     echo Incorrect choice
