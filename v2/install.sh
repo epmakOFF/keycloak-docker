@@ -2,7 +2,7 @@
 
 restore_config ()
 {
-clear
+echo
 echo Restore config
 cat <<EOF >.env
 POSTGRES_DB=keycloak_db
