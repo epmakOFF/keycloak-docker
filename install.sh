@@ -26,7 +26,7 @@ generate_cert() {
 }
 
 cert_dialog() {
-    echo -n "Enter path to your certificate "
+    echo -n "Enter path to your certificate: "
 	    read -e cert
     if [ -s $cert ]
     then
@@ -37,7 +37,7 @@ cert_dialog() {
         echo Abort!
         exit
     fi
-    echo -n "Enter path to your private key "
+    echo -n "Enter path to your private key: "
         read -e privkey
     if [ -s $privkey ]
     then
@@ -59,7 +59,7 @@ else
 fi
 
 KC_HOSTNAME=$(curl -s 2ip.ru).sslip.io
-echo -n "Enter your domain [$KC_HOSTNAME] "
+echo -n "Enter your domain [$KC_HOSTNAME]: "
 	read -e domain
 if [ "$domain" = "" ]
 then
@@ -71,7 +71,7 @@ else
     KC_HOSTNAME=$domain
 fi
 echo
-echo -n "Do you have certificate [y\N] "
+echo -n "Do you have certificate [y\N]: "
 	read -e have_cert
 if [ "$have_cert" = "" ]
     then generate_cert
@@ -95,7 +95,7 @@ echo Check your config:
 echo
 cat .env
 echo
-echo -n "Is congfig correct? [y/N] "
+echo -n "Is congfig correct? [y/N]: "
 	read -e choice
 if [ "$choice" = "" ]
     then restore_config

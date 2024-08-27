@@ -75,7 +75,7 @@ echo Check your config:
 echo
 cat .env
 echo
-echo -n "Is congfig correct? [y/N] "
+echo -n "Is congfig correct? [y/N]: "
 	read -e choice
 if [ "$choice" = "" ]
     then restore_config
