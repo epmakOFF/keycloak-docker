@@ -79,11 +79,9 @@ elif [ "$have_cert" = "n" ]
 elif [ "$have_cert" = "N" ]
     then generate_cert
 elif [ "$have_cert" = "y" ]
-    then
-        if [ "$have_cert" = "Y" ]
-            then
-                
-        fi
+    then cert_dialog
+elif [ "$have_cert" = "Y" ]
+    then cert_dialog      
 else
     echo Incorrect choice
     sleep 5
