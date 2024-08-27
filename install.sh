@@ -53,7 +53,7 @@ elif [ "$have_cert" = "n" ]
     then generate_cert
 elif [ "$have_cert" = "N" ]
     then generate_cert
-elif [ "$have_cert" != "y" ]
+elif [ "$have_cert" = "y" ]
     then
         if [ "$have_cert" = "Y" ]
             then
@@ -79,11 +79,11 @@ elif [ "$have_cert" != "y" ]
                     echo Abort!
                     exit
                 fi
-            else
-                echo Incorrect choice
-                sleep 5
-                exit
         fi
+else
+    echo Incorrect choice
+    sleep 5
+    exit
 fi
 
 
