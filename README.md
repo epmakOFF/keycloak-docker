@@ -8,6 +8,21 @@
 
 ## Самоподписанный/собственный сертификат  
 ### Подготовка <a id="preparing"/></a>
+#### Для ленивых
+Клонировать репозиторий
+``` bash
+git clone https://github.com/epmakOFF/keycloak-docker.git
+cd keycloak-docker
+```  
+(При наличии)  
+Подготовить файл сертификата и приватный ключ
+
+Запустить скрипт
+``` bash
+chmod +x install.sh
+sudo ./install.sh
+```
+#### Для упертых
 Клонировать репозиторий
 ``` bash
 git clone https://github.com/epmakOFF/keycloak-docker.git
