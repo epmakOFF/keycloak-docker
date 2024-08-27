@@ -62,8 +62,9 @@ KC_HOSTNAME=$(curl -s 2ip.ru).sslip.io
 echo -n "Enter your domain [$KC_HOSTNAME] "
 	read -e domain
 if [ "$domain" = "" ]
+then
     sed -i '/KC_HOSTNAME/d' .env
-    then echo KC_HOSTNAME=$KC_HOSTNAME >> .env
+    echo KC_HOSTNAME=$KC_HOSTNAME >> .env
 else
     sed -i '/KC_HOSTNAME/d' .env
     echo KC_HOSTNAME=$domain >> .env
