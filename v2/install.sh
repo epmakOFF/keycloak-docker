@@ -75,23 +75,16 @@ echo Check your config:
 echo
 cat .env
 echo
-echo -n "Is congfig correct? [y/N]: "
-	read -e choice
-if [ "$choice" = "" ]
-    then restore_config
-elif [ "$choice" = "n" ]
-    then restore_config
-elif [ "$choice" = "N" ]
-    then restore_config
-elif [ "$choice" != "y" ]
-    then
-        if [ "$choice" != "Y" ]
-            then
-                echo Incorrect choice
-                sleep 5
-                restore_config
-        fi
-fi
+read -p "Is congfig correct? [y/N]: " -e choice
+case "$choice" in
+    "" | "N" | "n"  )   restore_config;;
+    "Y" | "y"       )   echo;;
+    *               )
+        echo Incorrect choice
+        sleep 5
+        restore_config
+    ;;
+esac
  
 echo KEYCLOAK_ADMIN_PASSWORD=$(tr -dc 'A-Za-z0-9!?%=' < /dev/urandom | head -c 16) >> .env
 

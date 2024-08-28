@@ -57,37 +57,32 @@ else
     curl -fsSL https://get.docker.com -o get-docker.sh  
     sh get-docker.sh
 fi
-
+# Get domain
 KC_HOSTNAME=$(curl -s 2ip.ru).sslip.io
-echo -n "Enter your domain [$KC_HOSTNAME]: "
-	read -e domain
-if [ "$domain" = "" ]
-then
-    sed -i '/KC_HOSTNAME/d' .env
-    echo KC_HOSTNAME=$KC_HOSTNAME >> .env
-else
-    sed -i '/KC_HOSTNAME/d' .env
-    echo KC_HOSTNAME=$domain >> .env
-    KC_HOSTNAME=$domain
-fi
+read -p "Enter your domain [$KC_HOSTNAME]: " -e domain
+case "$domain" in
+    ""  ) 
+        sed -i '/KC_HOSTNAME/d' .env
+        echo KC_HOSTNAME=$KC_HOSTNAME >> .env
+    ;;
+    *   )
+        sed -i '/KC_HOSTNAME/d' .env
+        echo KC_HOSTNAME=$domain >> .env
+        KC_HOSTNAME=$domain
+    ;;
+esac
+
 echo
-echo -n "Do you have certificate [y\N]: "
-	read -e have_cert
-if [ "$have_cert" = "" ]
-    then generate_cert
-elif [ "$have_cert" = "n" ]
-    then generate_cert
-elif [ "$have_cert" = "N" ]
-    then generate_cert
-elif [ "$have_cert" = "y" ]
-    then cert_dialog
-elif [ "$have_cert" = "Y" ]
-    then cert_dialog      
-else
-    echo Incorrect choice
-    sleep 5
-    exit
-fi
+read -p "Do you have certificate [y\N]: " -e have_cert
+case "$have_cert" in
+    "" | "N" | "n"  )   generate_cert;;
+    "Y" | "y"       )   cert_dialog;;
+    *               )
+        echo Incorrect choice
+        sleep 5
+        exit
+    ;;
+esac
 
 
 clear
@@ -95,24 +90,17 @@ echo Check your config:
 echo
 cat .env
 echo
-echo -n "Is congfig correct? [y/N]: "
-	read -e choice
-if [ "$choice" = "" ]
-    then restore_config
-elif [ "$choice" = "n" ]
-    then restore_config
-elif [ "$choice" = "N" ]
-    then restore_config
-elif [ "$choice" != "y" ]
-    then
-        if [ "$choice" != "Y" ]
-            then
-                echo Incorrect choice
-                sleep 5
-                restore_config
-        fi
-fi
- 
+read -p "Is congfig correct? [y/N]: " -e choice
+case "$choice" in
+    "" | "N" | "n"  )   restore_config;;
+    "Y" | "y"       )   echo;;
+    *               )
+        echo Incorrect choice
+        sleep 5
+        restore_config
+    ;;
+esac
+
 echo KEYCLOAK_ADMIN_PASSWORD=$(tr -dc 'A-Za-z0-9!?%=' < /dev/urandom | head -c 16) >> .env
 docker compose -f ./docker-compose.yaml up -d
 
