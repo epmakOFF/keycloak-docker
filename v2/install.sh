@@ -32,6 +32,12 @@ read_email() {
         ;;
     esac
 }
+
+put_hostname() {
+    sed -i '/KC_HOSTNAME/d' .env
+    echo KC_HOSTNAME=$1 >> .env
+}
+
 if program_exists "docker"; then
     echo "Docker is installed."
     echo
@@ -50,7 +56,7 @@ then
 
 elif [ "$#" -eq 2 ]
 then
-    echo KC_HOSTNAME=$1 >> .env
+    put_hostname $1
     sed -i '/EMAIL/d' .env
     echo EMAIL=$2 >> .env
 elif [ "$#" -eq 1 ]
@@ -58,22 +64,22 @@ then
     email=$(echo "$1" | awk '/@/{print $0}')
     if [ -n "$email" ]
     then
-        echo KC_HOSTNAME=$KC_HOSTNAME >> .env
+        put_hostname $KC_HOSTNAME
         sed -i '/EMAIL/d' .env
         echo EMAIL=$1 >> .env
     elif [ "$EMAIL" = "CHANGE_ME" ]
     then
         read_email
-        echo KC_HOSTNAME=$1 >> .env
+        put_hostname $1
     fi
 elif [ "$#" -eq 0 ]
 then
     if [ "$EMAIL" = "CHANGE_ME" ]
     then
         read_email
-        echo KC_HOSTNAME=$KC_HOSTNAME >> .env
+        put_hostname $KC_HOSTNAME
     else
-        echo KC_HOSTNAME=$KC_HOSTNAME >> .env
+        put_hostname $KC_HOSTNAME
     fi
 fi
 
