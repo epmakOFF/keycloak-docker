@@ -1,7 +1,6 @@
 #!/bin/bash
 
-restore_config ()
-{
+restore_config() {
 echo
 echo Restore config
 cat <<EOF >.env

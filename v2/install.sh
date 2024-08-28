@@ -1,7 +1,6 @@
 #!/bin/bash
 
-restore_config ()
-{
+restore_config() {
 echo
 echo Restore config
 cat <<EOF >.env
@@ -18,6 +17,21 @@ program_exists() {
     type "$1" >/dev/null 2>&1
 }
 
+
+read_email() {
+    read -p "Enter email: " -e email
+    case "$email" in
+        ""  )
+            echo Error!!!
+            echo Need correct e-mail
+            exit
+        ;;
+        *   )
+            sed -i '/EMAIL/d' .env
+            echo EMAIL=$email >> .env
+        ;;
+    esac
+}
 if program_exists "docker"; then
     echo "Docker is installed."
     echo
@@ -26,7 +40,8 @@ else
     sh get-docker.sh
 fi
 
-
+source .env
+KC_HOSTNAME=$(curl -s 2ip.ru).sslip.io
 if [ "$#" -ge 3 ]
 then
     echo Error!!!
@@ -43,30 +58,21 @@ then
     email=$(echo "$1" | awk '/@/{print $0}')
     if [ -n "$email" ]
     then
-        echo KC_HOSTNAME=$(curl -s 2ip.ru).sslip.io >> .env
+        echo KC_HOSTNAME=$KC_HOSTNAME >> .env
         sed -i '/EMAIL/d' .env
         echo EMAIL=$1 >> .env
-    else
-        source .env
-        if [ "$EMAIL" = "CHANGE_ME" ]
-        then
-            echo Error!!!
-            echo Need correct e-mail
-            exit
-        else
-            echo KC_HOSTNAME=$1 >> .env
-        fi
+    elif [ "$EMAIL" = "CHANGE_ME" ]
+    then
+        read_email
+        echo KC_HOSTNAME=$1 >> .env
     fi
 elif [ "$#" -eq 0 ]
 then
-    source .env
     if [ "$EMAIL" = "CHANGE_ME" ]
     then
-        echo Error!!!
-        echo Need correct e-mail
-        exit
+        read_email
     else
-        echo KC_HOSTNAME=$(curl -s 2ip.ru).sslip.io >> .env
+        echo KC_HOSTNAME=$KC_HOSTNAME >> .env
     fi
 fi
 
