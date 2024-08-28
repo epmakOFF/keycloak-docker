@@ -71,6 +71,7 @@ then
     if [ "$EMAIL" = "CHANGE_ME" ]
     then
         read_email
+        echo KC_HOSTNAME=$KC_HOSTNAME >> .env
     else
         echo KC_HOSTNAME=$KC_HOSTNAME >> .env
     fi
