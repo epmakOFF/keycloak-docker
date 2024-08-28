@@ -70,8 +70,8 @@ then
     elif [ "$EMAIL" = "CHANGE_ME" ]
     then
         read_email
-        put_hostname $1
     fi
+    put_hostname $1
 elif [ "$#" -eq 0 ]
 then
     if [ "$EMAIL" = "CHANGE_ME" ]
