@@ -9,6 +9,7 @@ POSTGRES_USER=keycloak_db_user
 POSTGRES_PASSWORD=keycloak_db_user_password
 KEYCLOAK_ADMIN=admin
 EMAIL=CHANGE_ME
+KC_HOSTNAME=CHANGE_ME
 EOF
 exit
 }
@@ -38,6 +39,20 @@ put_hostname() {
     echo KC_HOSTNAME=$1 >> .env
 }
 
+read_domain() {
+    KC_HOSTNAME=$(curl -s 2ip.ru).sslip.io
+    read -p "Enter your domain [$KC_HOSTNAME]: " -e domain
+    case "$domain" in
+        ""  ) 
+            put_hostname $KC_HOSTNAME
+        ;;
+        *   )
+            put_hostname $domain
+            KC_HOSTNAME=$domain
+        ;;
+    esac
+}
+
 if program_exists "docker"; then
     echo "Docker is installed."
     echo
@@ -47,7 +62,6 @@ else
 fi
 
 source .env
-KC_HOSTNAME=$(curl -s 2ip.ru).sslip.io
 if [ "$#" -ge 3 ]
 then
     echo Error!!!
@@ -64,7 +78,7 @@ then
     email=$(echo "$1" | awk '/@/{print $0}')
     if [ -n "$email" ]
     then
-        put_hostname $KC_HOSTNAME
+        read_domain
         sed -i '/EMAIL/d' .env
         echo EMAIL=$1 >> .env
     elif [ "$EMAIL" = "CHANGE_ME" ]
@@ -80,9 +94,11 @@ then
     if [ "$EMAIL" = "CHANGE_ME" ]
     then
         read_email
-        put_hostname $KC_HOSTNAME
-    else
-        put_hostname $KC_HOSTNAME
+    fi
+
+    if [ "$KC_HOSTNAME" = "CHANGE_ME" ]
+    then
+        read_domain
     fi
 fi
 
