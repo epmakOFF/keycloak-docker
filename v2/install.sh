@@ -11,7 +11,7 @@ KEYCLOAK_ADMIN=admin
 EMAIL=CHANGE_ME
 KC_HOSTNAME=CHANGE_ME
 EOF
-exit
+exit 0
 }
 
 program_exists() {
@@ -25,7 +25,7 @@ read_email() {
         ""  )
             echo Error!!!
             echo Need correct e-mail
-            exit
+            exit 22
         ;;
         *   )
             sed -i '/EMAIL/d' .env
@@ -66,7 +66,7 @@ if [ "$#" -ge 3 ]
 then
     echo Error!!!
     echo Too much parameters 
-    exit
+    exit 22
 
 elif [ "$#" -eq 2 ]
 then

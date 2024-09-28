@@ -12,7 +12,7 @@ KC_HOSTNAME=\${KC_HOSTNAME}
 SSL_CERTIFICATE=./certs/nginx-selfsigned.crt
 SSL_CERTIFICATE_KEY=./certs/nginx-selfsigned.key
 EOF
-exit
+exit 0
 }
 
 program_exists() {
@@ -34,7 +34,7 @@ cert_dialog() {
     else
         echo File not found!
         echo Abort!
-        exit
+        exit 126
     fi
     echo -n "Enter path to your private key: "
         read -e privkey
@@ -45,7 +45,7 @@ cert_dialog() {
     else
         echo File not found!
         echo Abort!
-        exit
+        exit 126
     fi
 }
 
@@ -79,7 +79,7 @@ case "$have_cert" in
     *               )
         echo Incorrect choice
         sleep 5
-        exit
+        exit 22
     ;;
 esac
 
