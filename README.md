@@ -21,7 +21,6 @@ cd keycloak-docker
 
 Запустить скрипт
 ``` bash
-chmod +x install.sh
 sudo ./install.sh
 ```
 #### Для упертых
@@ -78,10 +77,6 @@ git clone https://github.com/epmakOFF/keycloak-docker.git
 cd keycloak-docker/v2
 ```
 
-Сделать скрипты исполняемыми
-``` bash
-chmod +x *.sh
-```
 (Опционально)  
 Изменить парамерты доступа к БД, логин администратора и email в файле `.env`
 
