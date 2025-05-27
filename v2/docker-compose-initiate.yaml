@@ -1,7 +1,7 @@
 services:
   nginx:
     container_name: nginx
-    image: nginx:1.27.1
+    image: nginx:1.28.0-alpine
     environment:
       KC_HOSTNAME: ${KC_HOSTNAME}
     ports:

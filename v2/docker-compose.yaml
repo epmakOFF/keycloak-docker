@@ -1,7 +1,7 @@
 name: keycloak-app
 services:
   web:
-    image: nginx:1.27.1
+    image: nginx:1.28.0-alpine
     restart: unless-stopped
     ports:
       - "80:80"
@@ -48,7 +48,7 @@ services:
     restart: always
 
   keycloak:
-    image: quay.io/keycloak/keycloak:25.0.4
+    image: quay.io/keycloak/keycloak:26.2.4
     command: start --proxy-headers xforwarded --hostname-strict false --http-enabled true
     environment:
       KC_HOSTNAME: ${KC_HOSTNAME}
