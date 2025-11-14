@@ -11,7 +11,7 @@
 #### Для ленивых
 Клонировать репозиторий
 ``` bash
-git clone https://github.com/epmakOFF/keycloak-docker.git
+git clone https://github.com/yc-beeline/keycloak-docker.git
 cd keycloak-docker
 ```  
 (При наличии)  
@@ -26,7 +26,7 @@ sudo ./install.sh
 #### Для упертых
 Клонировать репозиторий
 ``` bash
-git clone https://github.com/epmakOFF/keycloak-docker.git
+git clone https://github.com/yc-beeline/keycloak-docker.git
 cd keycloak-docker
 ```
 
@@ -73,7 +73,7 @@ docker compose up -d
 ### Подготовка <a id="deploy"/></a>
 Клонировать репозиторий
 ``` bash
-git clone https://github.com/epmakOFF/keycloak-docker.git
+git clone https://github.com/yc-beeline/keycloak-docker.git
 cd keycloak-docker/v2
 ```
 
