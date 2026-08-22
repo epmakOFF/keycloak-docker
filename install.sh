@@ -57,7 +57,7 @@ else
     sh get-docker.sh
 fi
 # Get domain
-KC_HOSTNAME=$(curl -s 2ip.ru).sslip.io
+KC_HOSTNAME=$(curl -s ifconfig.me).sslip.io
 read -p "Enter your domain [$KC_HOSTNAME]: " -e domain
 case "$domain" in
     ""  ) 

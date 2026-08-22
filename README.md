@@ -46,7 +46,7 @@ sg docker # обновить права на группу, если не пол�
 Переопределить переменные в файле `.env`.  
 Если не задан домен в `.env`, взять публичный:  
 ``` bash
-export KC_HOSTNAME=$(curl -s 2ip.ru).sslip.io  
+export KC_HOSTNAME=$(curl -s ifconfig.me).sslip.io  
 ```
 
 #### Нет сертификата  
